@@ -10,17 +10,14 @@ struct Direction {
   int dJ;
 };
 
-std::vector<std::vector<char>> input;
-
-bool inBounds(size_t i, size_t j);
-
 bool checkM(int i, int j, Direction d);
 bool checkS(int i, int j, Direction d);
+bool inBounds(size_t i, size_t j);
+
+std::vector<std::vector<char>> input;
 
 int main() {
   std::fstream file(FILE_PATH);
-
-  // Prepare input matrix (2-dim-vector)
   std::string line;
 
   while (file >> line) {
@@ -35,7 +32,6 @@ int main() {
 
   int count = 0;
 
-  // Solve
   for (decltype(input.size()) i = 0; i < input.size(); ++i) {
     for (decltype(input.size()) j = 0; j < input[0].size(); ++j) {
       if (input[i][j] != 'A') continue;
@@ -54,11 +50,6 @@ int main() {
   std::cout << count << std::endl;
 }
 
-bool inBounds(size_t i, size_t j) {
-  return i >= 0 && i < input[0].size()
-   && j >= 0 && j < input.size();
-}
-
 bool checkM(int i, int j, Direction d) {
   
   auto nextI = i + 1 * d.dI;
@@ -75,4 +66,9 @@ bool checkS(int i, int j, Direction d) {
 
   return inBounds(nextI, nextJ) &&
     input[nextI][nextJ] == 'S';
+}
+
+bool inBounds(size_t i, size_t j) {
+  return i >= 0 && i < input[0].size()
+   && j >= 0 && j < input.size();
 }

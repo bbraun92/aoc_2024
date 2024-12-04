@@ -10,18 +10,15 @@ struct Direction {
   int dJ;
 };
 
-std::vector<std::vector<char>> input;
-
-bool inBounds(size_t i, size_t j);
-
 bool checkMas(int i, int j, Direction d);
+bool inBounds(size_t i, size_t j);
 
 const char LETTERS[3] = {'M', 'A', 'S'};
 
+std::vector<std::vector<char>> input;
+
 int main() {
   std::fstream file(FILE_PATH);
-
-  // Prepare input matrix (2-dim-vector)
   std::string line;
 
   while (file >> line) {
@@ -36,7 +33,6 @@ int main() {
 
   int count = 0;
 
-  // Solve
   for (decltype(input.size()) i = 0; i < input.size(); ++i) {
     for (decltype(input.size()) j = 0; j < input[0].size(); ++j) {
       if (input[i][j] != 'X') continue;
@@ -55,11 +51,6 @@ int main() {
   std::cout << count << std::endl;
 }
 
-bool inBounds(size_t i, size_t j) {
-  return i >= 0 && i < input[0].size()
-   && j >= 0 && j < input.size();
-}
-
 bool checkMas(int i, int j, Direction d) {
   for (int k = 0; k < 3; ++k) {
     auto nextI = i + (k + 1) * d.dI;
@@ -70,4 +61,9 @@ bool checkMas(int i, int j, Direction d) {
   }
 
   return true;
+}
+
+bool inBounds(size_t i, size_t j) {
+  return i >= 0 && i < input[0].size()
+   && j >= 0 && j < input.size();
 }
