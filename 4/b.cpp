@@ -69,6 +69,6 @@ bool checkS(int i, int j, Direction d) {
 }
 
 bool inBounds(size_t i, size_t j) {
-  return i >= 0 && i < input[0].size()
-   && j >= 0 && j < input.size();
+  return i >= 0 && i < input.size()
+   && j >= 0 && j < input[0].size();
 }
